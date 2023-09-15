@@ -2,6 +2,7 @@ const { faker } = require("@faker-js/faker");
 const { writeFile } = require("fs");
 const { getRandomValuesString } = require("./utils")
 const { Parser } = require("@json2csv/plainjs");
+const { get } = require("https");
 
 const filePath = "./fakeIndianaLeads.csv";
 
@@ -15,7 +16,7 @@ const canSpeakLanguage = ["948010000", "948010001", "948010002", "100000000"]
 const familySupport = ["948010000", "948010001", "948010002"]
 const openToFostering = ["948010000", "948010001", "948010002", "94801003", "948010004", "948010005", "9489010006", "948010007", "948010008", "948010009", "948010010", "948010011"] 
 const engagementInterest = ["948010000", "948010001", "948010002", "94801003", "948010004", "948010009"]
-const raceEthnicity = ["948010000", "948010001", "948010002", "94801003", "948010004", "948010005", "9489010006", "948010007"]
+const raceEthnicity = ["948010000", "948010001", "948010002", "94801003", "948010004", "948010005", "948010006", "948010007"]
 const ageWillingToFoster = ["948010000", "948010001", "948010002", "94801003", "948010004", "948010005", "9489010006"]
 const ageRangeWillngToAdopt = ["948010000", "948010001", "948010002", "94801003"]
 const frequency = ["948010000", "948010001", "948010002"]
@@ -50,7 +51,7 @@ let record = () => {
 
   return {
     "tc_ecinquirysourceothertext": "inqSourceOther",
-    "tc_partnersraceethnicity": getRandomValuesString(partnersRaceEthnicity),
+    "tc_partnersraceethnicity": getRandomValuesString(partnersRaceEthnicity, "948010011"),
     "_tc_stateid_value": "Indiana",
     "_tc_county_value": "COUNTY",
     "tc_fosteragerange2to5years": faker.datatype.boolean(0.5),
@@ -114,7 +115,7 @@ let record = () => {
     "tc_childreninhousehold": faker.number.int({min: 948010000, max: 948010008}),
     "tc_individualorgroupvolunteer": faker.number.int({min: 948010000, max: 948010001}),
     "tc_inquirysourceconnectedfostercare": faker.datatype.boolean(0.5),
-    "tc_opentofostering": getRandomValuesString(openToFostering),
+    "tc_opentofostering": getRandomValuesString(openToFostering, "948010000"),
     "tc_citizenship": faker.datatype.boolean(0.5),
     "tc_engagementinterestvolunteering": faker.datatype.boolean(0.5),
     "tc_partnerracepacificislander": faker.datatype.boolean(0.5),
@@ -166,9 +167,9 @@ let record = () => {
     "tc_engagementinterestadopting": faker.datatype.boolean(0.5),
     "tc_inquirysourcerelative": faker.datatype.boolean(0.5),
     "tc_volunteerfrequency": faker.number.int({min: 948010000, max: 948010002}),
-    "tc_raceethnicity": getRandomValuesString(raceEthnicity),
+    "tc_raceethnicity": getRandomValuesString(raceEthnicity, "948010006"),
     "tc_opentofosteringhearingimpairments": faker.datatype.boolean(0.5),
-    "tc_childslevelofneed": getRandomValuesString(childLevelOfNeed),
+    "tc_childslevelofneed": getRandomValuesString(childLevelOfNeed, "948010004"),
     "tc_raceethnicitypacificislander": faker.datatype.boolean(0.5),
     "tc_partnerraceprefernottoanswer": faker.datatype.boolean(0.5),
     "tc_faithcommunitychurchorbusiness": faker.datatype.boolean(0.5),
@@ -204,11 +205,11 @@ let record = () => {
     "tc_servicesandsupportsoffered": getRandomValuesString(servicesAndSupportsOffered),
     "tc_pace": getRandomValuesString(pace),
     "_tc_zipcode_value": "ZIPCODE",
-    "tc_organizationtypefilter": getRandomValuesString(organizationTypeFilter),
+    "tc_organizationtypefilter": getRandomValuesString(organizationTypeFilter, "948010004"),
     "tc_agerangevolunteer": faker.number.int({min: 948010000, max: 948010003}),
     "tc_adoptionpreappsubmitted": faker.datatype.boolean(0.5),
     "tc_agerangewillingtoadopt": getRandomValuesString(ageRangeWillngToAdopt),
-    "tc_frequency": "948010000,948010001,948010002",
+    "tc_frequency": getRandomValuesString(frequency),
     "tc_raceethnicitylatino": faker.datatype.boolean(0.5),
     "tc_fosteragerangebirth23months": faker.datatype.boolean(0.5),
     "tc_inquirysourceother": faker.datatype.boolean(0.5),
@@ -252,3 +253,5 @@ writeFile(filePath, csv, err => {
     }
     console.log("Data written successfully to disk");
 })
+
+//console.log(getRandomValuesString(raceEthnicity, "948010006"))

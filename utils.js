@@ -1,4 +1,4 @@
-function getRandomValuesString(arr) {
+function getRandomValuesString(arr, specialValue="") {
     let result = []
     let max = Math.floor(Math.random() * (arr.length - 1) +1)
 
@@ -6,6 +6,9 @@ function getRandomValuesString(arr) {
         result.push(arr[Math.floor(Math.random() * arr.length)])
     }
     let uniqueResult = [...new Set(result)]
+
+    // i.e. "all of the above" or similar value in a multiselect
+    if (specialValue && uniqueResult.includes(specialValue)) return specialValue;
 
     let resultString = uniqueResult.join(",")
    
