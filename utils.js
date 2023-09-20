@@ -10,7 +10,7 @@ function getRandomValuesString(arr, specialValue="") {
     // i.e. "all of the above" or similar value in a multiselect
     if (specialValue && uniqueResult.includes(specialValue)) return specialValue;
 
-    let resultString = uniqueResult.join(",")
+    let resultString = uniqueResult.join(";")
    
     return resultString
 }
