@@ -1,11 +1,12 @@
 const { faker } = require("@faker-js/faker");
 const { writeFile } = require("fs");
-const { getRandomValuesString } = require("./utils")
+const { getRandomValuesString, getDates } = require("./utils")
 const { Parser } = require("@json2csv/plainjs");
 
 const filePath = "./fakeIndianaLeads.csv";
 
 // Partner orgs
+// We loop through these and create a number of records per partner org
 const partnerOrgs = ["Connected Foster Care", "Firefly Children & Family Alliance", "For The Children", "Hands Of Hope", "Hope House", "Indiana GAL/CASA", "Indiana Kids Belong", "Isaiah 117 House", "Lost Sparrows", "Orphan Care Alliance", "The Cooper House", "The Isaiah 1:17 Project"]
 // Arr with only one org for testing purposes
 //const partnerOrgs = ["Connected Foster Care"]
@@ -48,6 +49,7 @@ let record = () => {
 
   let lead = person();
   let partner = person();
+  let dates = getDates();
 
   return {
     "tc_ecinquirysourceothertext": "inqSourceOther",
@@ -175,6 +177,7 @@ let record = () => {
 let recordList = [];
 
 partnerOrgs.forEach(partnerOrg => {
+  // Change the 20 to the number of records you want per partner org
   for (let i = 0; i < 20; i++) {
     let newRecord = record();
     newRecord._tc_fosterorganization_value = partnerOrg;
